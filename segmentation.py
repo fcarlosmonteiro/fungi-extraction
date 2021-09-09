@@ -18,6 +18,8 @@ for c in cnts:
     x,y,w,h = cv2.boundingRect(c)
     cv2.rectangle(original, (x, y), (x + w, y + h), (36,255,12), 2)
 
+M = cv2.moments(mascara)
+print(M)
 
 cv2.imshow('mascara', mascara)
 cv2.imshow('original', original)
