@@ -18,15 +18,18 @@ def rescale(src):
     
     return output
 
-i = cv2.imread('i4.jpg')
+i = cv2.imread('i1.jpg')
 imagem=rescale(i)
 
+#remove ruidos
 image = cv2.fastNlMeansDenoisingColored(imagem,None,12,12,7,21)
 #cv2.imshow("desnoise",image)
 
+#colore imagem
 ds = cv2.cvtColor(imagem, cv2.COLOR_BGR2HSV)
 #cv2.imshow("color after desnoise",ds)
 
+#aplica blur pra tirar mias imperfeicoes
 img_hsv = cv2.GaussianBlur(ds,(95,95),cv2.BORDER_DEFAULT)
 
 result = img_hsv.copy()
@@ -36,13 +39,14 @@ upper = np.array([56,255,255])
 mask = cv2.inRange(img_hsv, lower, upper)
 result = cv2.bitwise_and(result, result, mask=mask)
 
+#converte em cinza
 gray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)
-#cv2.imshow('mask', mask)
-#cv2.imshow('result in gray', gray)
 
+#marca area de interesse
 edge_detected_image = cv2.Canny(gray, 175, 200)
-cv2.imshow('Edge', edge_detected_image)
+#cv2.imshow('Edge', edge_detected_image)
 
+#contorna area de interesse
 cnts = cv2.findContours(edge_detected_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = cnts[0] if len(cnts) == 2 else cnts[1]
 
