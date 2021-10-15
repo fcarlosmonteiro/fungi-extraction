@@ -3,4 +3,4 @@ using opencv to extract fungi from images
 libs: opencv and numpy
 
 results:
-<div align="center"><img src="result.png" /></div>
+<div align="center"><img src="image/result.png" /></div>

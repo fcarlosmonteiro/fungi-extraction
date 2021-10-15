@@ -18,7 +18,7 @@ def rescale(src):
     
     return output
 
-i = cv2.imread('i2.jpg')
+i = cv2.imread('image/i2.jpg')
 imagem=rescale(i)
 
 #remove ruidos
